@@ -3,6 +3,7 @@ package com.example.securesearch.controller;
 import com.example.securesearch.model.EncryptedFile;
 import com.example.securesearch.service.EncryptionService;
 import com.example.securesearch.service.VerificationService;
+import com.example.securesearch.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -55,6 +56,3 @@ public class SearchController {
             return "⚠️ Verification Failed — Data may be incomplete or modified.";
     }
 }
-
-@Repository
-interface FileRepository extends MongoRepository<EncryptedFile, String> {}
