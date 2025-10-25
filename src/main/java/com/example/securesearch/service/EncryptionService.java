@@ -9,7 +9,8 @@ import java.util.Base64;
 
 @Service
 public class EncryptionService {
-    private static final String SECRET_KEY = "cloudsecurekey123";
+    private static final String SECRET_KEY = "cloudsecurekey12"; 
+
 
     public String encrypt(String text) throws Exception {
         SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
