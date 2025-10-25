@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Search Cloud</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: rgba(0,0,0,0.6);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #ffdd57;
+            margin-bottom: 30px;
+        }
+        input[type="file"], input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+        button {
+            background-color: #ffdd57;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ffc107;
+        }
+        .search-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Secure Search Cloud 🔒</h1>
+        
+        <!-- File Upload -->
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br>
+            <button type="submit">Upload File 📤</button>
+        </form>
+
+        <!-- Search -->
+        <div class="search-section">
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search files..." required>
+                <br>
+                <button type="submit">Search 🔍</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
