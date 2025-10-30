@@ -14,3 +14,5 @@ Simulation of the research paper: *Achieving Secure, Universal, and Fine-Grained
 2. Connect repo to Render  
 3. Build: `./mvnw clean package -DskipTests`  
 4. Start: `java -jar target/secure-search-0.0.1-SNAPSHOT.jar`
+
+LIVE AT : https://secure-search-cloud-1.onrender.com/
