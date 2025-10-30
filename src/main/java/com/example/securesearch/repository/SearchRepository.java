@@ -1,3 +1,4 @@
+
 package com.example.securesearch.repository;
 
 import com.example.securesearch.model.SearchItem;

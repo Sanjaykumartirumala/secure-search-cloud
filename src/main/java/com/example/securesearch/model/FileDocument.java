@@ -22,4 +22,8 @@ public class FileDocument {
     public void setFilename(String filename) { this.filename = filename; }
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ff75c05 (Added mvnw.cmd and updated Dockerfile for Render deployment)
