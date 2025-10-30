@@ -10,8 +10,4 @@ public class UIController {
     public String home() {
         return "index"; // points to src/main/resources/templates/index.html
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ff75c05 (Added mvnw.cmd and updated Dockerfile for Render deployment)
