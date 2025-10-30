@@ -11,19 +11,24 @@ public class FileDocument {
     private String content;
 
     public FileDocument() {}
+
     public FileDocument(String filename, String content) {
         this.filename = filename;
         this.content = content;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-    public String getFilename() { return filename; }
-    public void setFilename(String filename) { this.filename = filename; }
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> ff75c05 (Added mvnw.cmd and updated Dockerfile for Render deployment)
+    public String getId() { 
+        return id; 
+    }
+
+    public void setId(String id) { 
+        this.id = id; 
+    }
+
+    public String getFilename() { 
+        return filename; 
+    }
+
+    public void setFilename(String filename) { 
+        this.filename = filename; 
+    }
