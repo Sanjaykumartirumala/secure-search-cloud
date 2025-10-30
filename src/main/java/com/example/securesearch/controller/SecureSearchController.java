@@ -41,6 +41,4 @@ public class SecureSearchController {
                 .anyMatch(f -> f.getContent().contains(keyword));
         return ResponseEntity.ok(exists ? "Keyword found ✅" : "Keyword not found ❌");
     }
-
-}
 }
