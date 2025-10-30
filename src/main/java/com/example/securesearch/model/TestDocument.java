@@ -1,29 +1,8 @@
-<<<<<<< HEAD
-package com.example.demo.model;
-=======
 package com.example.securesearch.model;
->>>>>>> ff75c05 (Added mvnw.cmd and updated Dockerfile for Render deployment)
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-<<<<<<< HEAD
-@Document(collection = "test_collection")
-public class TestDocument {
-    @Id
-    private String id;
-    private String message;
-
-    public TestDocument() {}
-
-    public TestDocument(String message) {
-        this.message = message;
-    }
-
-    public String getId() { return id; }
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
-=======
 @Document(collection = "testDocuments") // MongoDB collection name
 public class TestDocument {
 
@@ -64,5 +43,4 @@ public class TestDocument {
     public void setAge(int age) {
         this.age = age;
     }
->>>>>>> ff75c05 (Added mvnw.cmd and updated Dockerfile for Render deployment)
 }
