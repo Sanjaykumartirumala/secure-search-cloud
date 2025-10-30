@@ -84,7 +84,7 @@
     <!-- Upload Section -->
     <div class="section">
         <h2>Upload File</h2>
-        <textarea id="uploadContent" placeholder="Enter text to encrypt"></textarea><br>
+        <textarea id="uploadContent" placeholder="Enter text to store"></textarea><br>
         <button onclick="uploadFile()">Upload</button>
         <div id="uploadResponse" class="response"></div>
     </div>
@@ -99,7 +99,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Encrypted Content</th>
+                    <th>Stored Content</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -108,43 +108,63 @@
 
     <!-- Verify Section -->
     <div class="section">
-        <h2>Verify File</h2>
-        <input type="text" id="verifyId" placeholder="Enter File ID">
+        <h2>Verify Keyword</h2>
+        <input type="text" id="verifyKeyword" placeholder="Enter keyword to verify">
         <button onclick="verifyFile()">Verify</button>
         <div id="verifyResponse" class="response"></div>
     </div>
 
     <script>
-        const apiBase = '/api';
+        // All API calls go directly to your Spring Boot backend
+        const baseUrl = '';
 
+        // Upload new text
         function uploadFile() {
-            const content = document.getElementById('uploadContent').value;
-            fetch(`${apiBase}/upload`, {
+            const content = document.getElementById('uploadContent').value.trim();
+            if (!content) {
+                document.getElementById('uploadResponse').innerText = 'Please enter text before uploading.';
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('text', content);
+
+            fetch(`${baseUrl}/upload`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ encryptedContent: content })
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
             })
             .then(res => res.text())
-            .then(data => document.getElementById('uploadResponse').innerText = data)
+            .then(data => {
+                document.getElementById('uploadResponse').innerText = data;
+                document.getElementById('uploadContent').value = '';
+            })
             .catch(err => document.getElementById('uploadResponse').innerText = 'Error: ' + err);
         }
 
+        // Search for keyword
         function searchFile() {
-            const keyword = document.getElementById('searchKeyword').value;
-            fetch(`${apiBase}/search?keyword=${encodeURIComponent(keyword)}`, { method: 'POST' })
+            const keyword = document.getElementById('searchKeyword').value.trim();
+            if (!keyword) {
+                document.getElementById('searchResponse').innerText = 'Enter a keyword to search.';
+                return;
+            }
+
+            fetch(`${baseUrl}/search?keyword=${encodeURIComponent(keyword)}`)
             .then(res => res.json())
             .then(data => {
                 const table = document.getElementById('searchTable');
                 const tbody = table.querySelector('tbody');
                 tbody.innerHTML = '';
+
                 if (data.length === 0) {
-                    document.getElementById('searchResponse').innerText = 'No files found';
+                    document.getElementById('searchResponse').innerText = 'No results found.';
                     table.style.display = 'none';
                 } else {
-                    document.getElementById('searchResponse').innerText = '';
-                    data.forEach(f => {
+                    document.getElementById('searchResponse').innerText = `Found ${data.length} result(s):`;
+                    data.forEach(content => {
                         const row = document.createElement('tr');
-                        row.innerHTML = `<td>${f.id}</td><td>${f.encryptedContent}</td>`;
+                        row.innerHTML = `<td>•</td><td>${content}</td>`;
                         tbody.appendChild(row);
                     });
                     table.style.display = 'table';
@@ -153,15 +173,20 @@
             .catch(err => document.getElementById('searchResponse').innerText = 'Error: ' + err);
         }
 
+        // Verify keyword existence
         function verifyFile() {
-            const id = document.getElementById('verifyId').value;
-            fetch(`${apiBase}/verify/${encodeURIComponent(id)}`, { method: 'POST' })
+            const keyword = document.getElementById('verifyKeyword').value.trim();
+            if (!keyword) {
+                document.getElementById('verifyResponse').innerText = 'Enter a keyword to verify.';
+                return;
+            }
+
+            fetch(`${baseUrl}/verify?keyword=${encodeURIComponent(keyword)}`)
             .then(res => res.text())
             .then(data => {
                 const respDiv = document.getElementById('verifyResponse');
                 respDiv.innerText = data;
-                if (data.includes('Successful')) respDiv.className = 'response status success';
-                else if (data.includes('Failed')) respDiv.className = 'response status warning';
+                if (data.includes('✅')) respDiv.className = 'response status success';
                 else respDiv.className = 'response status error';
             })
             .catch(err => {
